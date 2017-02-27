@@ -49,7 +49,16 @@ def login():
         flash_errors(form)
         return render_template("login.html", form=form)
         
-           
+
+
+@app.route("/secure_page", methods=["GET"])
+@login_required
+def secure_page():
+    if not current_user.is_authenticated:
+        return redirect(url_for("login"))
+    return render_template('secure_page.html')
+
+
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session
 @login_manager.user_loader
