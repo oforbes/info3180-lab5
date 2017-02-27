@@ -24,3 +24,9 @@ class UserProfile(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+    
+    def query(self):
+        return True
+        
+    #def filter_by(self):
+       # return True
