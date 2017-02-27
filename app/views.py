@@ -58,6 +58,18 @@ def secure_page():
         return redirect(url_for("login"))
     return render_template('secure_page.html')
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash('You logged out', 'danger')
+    return redirect(url_for('home'))
+
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,error), 'danger')   
 
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session
